@@ -23,7 +23,7 @@ const tertiaryMix = [0.16, 0.1, 0.14, 0.12, 0.09, 0.08];
 const segments = 5;
 
 const config = {
-  blur: 40,
+  blur: 41,
   amplitude: 89,
   offset: 10,
   rotation: 0,
