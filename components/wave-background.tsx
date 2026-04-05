@@ -25,7 +25,7 @@ const segments = 5;
 const config = {
   blur: 41,
   amplitude: 89,
-  offset: 10,
+  offset: 28,
   rotation: 0,
   speed: 50,
 };
