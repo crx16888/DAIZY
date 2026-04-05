@@ -1,0 +1,134 @@
+:root {
+  --bg: #07111f;
+  --bg-soft: #0e1b31;
+  --panel: rgba(11, 25, 44, 0.7);
+  --panel-border: rgba(166, 210, 255, 0.16);
+  --text: #eff6ff;
+  --muted: #aac2df;
+  --accent: #8ec9ff;
+  --accent-strong: #d7ecff;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  --radius-lg: 32px;
+  --radius-md: 22px;
+  --radius-sm: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(85, 141, 212, 0.28), transparent 32%),
+    radial-gradient(circle at 80% 10%, rgba(64, 130, 216, 0.18), transparent 25%),
+    linear-gradient(180deg, #0b1422 0%, #08101b 45%, #06101d 100%);
+  color: var(--text);
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page-shell {
+  position: relative;
+  z-index: 1;
+  width: min(100%, calc(100% - 40px));
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 20px 0 0;
+}
+
+.topbar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  margin: 0 auto;
+  padding: 0;
+  color: #eef7ff;
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
+}
+
+.center-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 88px 24px 24px;
+  transform: translateY(-32px);
+  pointer-events: none;
+}
+
+.center-image {
+  width: min(1120px, 90vw);
+  height: auto;
+  filter: drop-shadow(0 32px 80px rgba(0, 0, 0, 0.32));
+}
+
+.site-background-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 720px) {
+  .page-shell {
+    width: min(100% - 24px, 100%);
+    padding-top: 16px;
+  }
+
+  .topbar {
+    justify-content: center;
+  }
+
+  .brand-chip {
+    min-height: 28px;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+  }
+
+  .center-stage {
+    padding-top: 72px;
+    transform: translateY(-16px);
+  }
+
+  .center-image {
+    width: min(84vw, 460px);
+  }
+}
