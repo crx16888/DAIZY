@@ -49,8 +49,12 @@ export function WaveBackground() {
     }
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const supportsCanvasFilter = typeof context.filter === "string";
     let width = 0;
     let height = 0;
+
+    canvas.style.setProperty("filter", "none");
+    canvas.style.setProperty("-webkit-filter", "none");
 
     const resize = () => {
       width = window.innerWidth;
@@ -133,7 +137,7 @@ export function WaveBackground() {
       const speedScale = 0.2 + (config.speed / 100) * 1.8;
       timeRef.current += 0.005 * speedScale;
 
-      const blurPx = Math.round(Math.min(width, height) * (config.blur / 100) * 0.22);
+      const blurPx = Math.max(48, Math.round(Math.min(width, height) * (config.blur / 100) * 0.22));
       const amplitudeScale = 0.3 + (config.amplitude / 100) * 1.4;
       const offset = config.offset / 100;
       const angle = (config.rotation * Math.PI) / 180;
@@ -152,7 +156,16 @@ export function WaveBackground() {
       context.translate(width / 2, height / 2);
       context.rotate(angle);
       context.translate(-width / 2, -height / 2);
-      context.filter = blurPx > 0 ? `blur(${blurPx}px)` : "none";
+      if (supportsCanvasFilter) {
+        context.filter = blurPx > 0 ? `blur(${blurPx}px)` : "none";
+        canvas.style.setProperty("filter", "none");
+        canvas.style.setProperty("-webkit-filter", "none");
+      } else {
+        context.filter = "none";
+        const cssBlur = blurPx > 0 ? `blur(${blurPx}px)` : "none";
+        canvas.style.setProperty("filter", cssBlur);
+        canvas.style.setProperty("-webkit-filter", cssBlur);
+      }
       context.fillStyle = "#000000";
       context.fillRect(originX - 100, originY - 100, extentW + 200, extentH + 200);
 
@@ -171,6 +184,8 @@ export function WaveBackground() {
 
     return () => {
       window.removeEventListener("resize", resize);
+      canvas.style.setProperty("filter", "none");
+      canvas.style.setProperty("-webkit-filter", "none");
       if (frameRef.current !== null) {
         window.cancelAnimationFrame(frameRef.current);
       }
